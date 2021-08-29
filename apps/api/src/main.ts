@@ -1,24 +1,30 @@
 import * as express from 'express';
 // import * as cors from 'cors';
-import { createTodoRoute, updateStatusRoute } from './app/routes';
+import {
+  createTodoRoute,
+  updateTodoStatusRoute,
+  createSubtaskRoute,
+} from './app/routes';
 import { Response } from 'express-serve-static-core';
-import { ResponseBody } from '@todolist/shared';
+import { IResponseBody } from '@todolist/shared';
 import { NextFunction } from 'express';
+import { BASE_URL, SUBTASK_URL, TODO_URL } from './app/constants';
 // import { corsOptions as options } from './app/configs';
-
-const BASE_URL = '/api/todo';
 
 const app = express();
 
 app.use(express.json());
-app.use(BASE_URL, createTodoRoute);
-app.use(BASE_URL, updateStatusRoute);
-app.use((err: Error, req, res: Response<ResponseBody>, _next: NextFunction) => {
-  res.status(500).json({
-    status: { message: err.message, code: 500 },
-    data: {},
-  });
-});
+app.use(TODO_URL, createTodoRoute);
+app.use(TODO_URL, updateTodoStatusRoute);
+app.use(SUBTASK_URL, createSubtaskRoute);
+app.use(
+  (err: Error, req, res: Response<IResponseBody>, _next: NextFunction) => {
+    res.status(500).json({
+      status: { message: err.message, code: 500 },
+      data: {},
+    });
+  }
+);
 
 const port = process.env.port || 3333;
 const server = app.listen(port, () => {
