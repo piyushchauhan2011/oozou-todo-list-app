@@ -3,7 +3,7 @@ import * as express from 'express';
 import {
   createTodoRoute,
   updateTodoStatusRoute,
-  createSubtaskRoute,
+  createSubtaskRoute, updateSubtaskStatusRoute
 } from './app/routes';
 import { Response } from 'express-serve-static-core';
 import { IResponseBody } from '@todolist/shared';
@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(TODO_URL, createTodoRoute);
 app.use(TODO_URL, updateTodoStatusRoute);
 app.use(SUBTASK_URL, createSubtaskRoute);
+app.use(SUBTASK_URL, updateSubtaskStatusRoute)
 app.use(
   (err: Error, req, res: Response<IResponseBody>, _next: NextFunction) => {
     res.status(500).json({
