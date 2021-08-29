@@ -1,23 +1,12 @@
 {
   "version": 2,
-  "cli": {
-    "defaultCollection": "@nrwl/react"
-  },
+  "cli": { "defaultCollection": "@nrwl/react" },
   "defaultProject": "my-todo-list",
   "generators": {
     "@nrwl/react": {
-      "application": {
-        "style": "css",
-        "linter": "eslint",
-        "babel": true
-      },
-      "component": {
-        "style": "css"
-      },
-      "library": {
-        "style": "css",
-        "linter": "eslint"
-      }
+      "application": { "style": "css", "linter": "eslint", "babel": true },
+      "component": { "style": "css" },
+      "library": { "style": "css", "linter": "eslint" }
     }
   },
   "projects": {
@@ -75,9 +64,7 @@
             "proxyConfig": "apps/my-todo-list/proxy.conf.json"
           },
           "configurations": {
-            "production": {
-              "buildTarget": "my-todo-list:build:production"
-            }
+            "production": { "buildTarget": "my-todo-list:build:production" }
           }
         },
         "lint": {
@@ -109,9 +96,7 @@
             "devServerTarget": "my-todo-list:serve"
           },
           "configurations": {
-            "production": {
-              "devServerTarget": "my-todo-list:serve:production"
-            }
+            "production": { "devServerTarget": "my-todo-list:serve:production" }
           }
         },
         "lint": {
@@ -152,15 +137,11 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "api:build"
-          }
+          "options": { "buildTarget": "api:build" }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["apps/api/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -172,15 +153,21 @@
         }
       }
     },
-    "api-interfaces": {
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
+    "shared": {
+      "root": "libs/shared",
+      "sourceRoot": "libs/shared/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["libs/shared/**/*.ts"] }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared"],
           "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+            "jestConfig": "libs/shared/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }

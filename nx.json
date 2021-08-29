@@ -1,40 +1,27 @@
 {
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "npmScope": "my-todo-list",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
   "projects": {
-    "my-todo-list": {
-      "tags": []
-    },
+    "my-todo-list": { "tags": [] },
     "my-todo-list-e2e": {
       "tags": [],
       "implicitDependencies": ["my-todo-list"]
     },
-    "api": {
-      "tags": []
-    },
-    "api-interfaces": {
-      "tags": []
-    }
+    "api": { "tags": [] },
+    "shared": { "tags": [] }
   }
 }
