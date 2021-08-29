@@ -7,6 +7,9 @@ export interface ITodo {
   title: string;
   status: Status;
   createdDate: Date;
+  subtasks?: [];
 }
 
-export type Subtask = ITodo;
+export interface ISubtask extends ITodo {
+  todoId: string;
+}

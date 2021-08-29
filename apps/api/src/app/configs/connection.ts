@@ -14,8 +14,6 @@ const options: ConnectionOptions = {
   synchronize: true,
 };
 
-const connect = async () => {
-  return createConnection(options);
-};
+const connect = async () => createConnection(options);
 
 export default connect;

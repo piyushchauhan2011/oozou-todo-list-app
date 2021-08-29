@@ -14,15 +14,15 @@ class TodoEntity implements ITodo {
   @Column()
   title: string;
 
-  @CreateDateColumn()
-  createdDate: Date;
-
   @Column({
     type: 'enum',
     enum: Status,
     default: Status.Pending,
   })
   status: Status;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdDate: Date;
 }
 
 export default TodoEntity;
