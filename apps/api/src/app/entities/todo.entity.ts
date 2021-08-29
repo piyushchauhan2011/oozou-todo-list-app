@@ -3,8 +3,11 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  OneToMany,
+  JoinTable,
 } from 'typeorm';
-import { Status, ITodo } from '@todolist/shared';
+import { Status, ITodo, ISubtask } from '@todolist/shared';
+import SubtaskEntity from './subtask.entity';
 
 @Entity()
 class TodoEntity implements ITodo {
@@ -23,6 +26,10 @@ class TodoEntity implements ITodo {
 
   @CreateDateColumn({ name: 'created_at' })
   createdDate: Date;
+
+  @OneToMany(() => SubtaskEntity, (subtask) => subtask.todoId)
+  @JoinTable()
+  subtasks: ISubtask[];
 }
 
 export default TodoEntity;
