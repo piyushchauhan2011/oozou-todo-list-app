@@ -1,9 +1,9 @@
-export interface ResponseStatus {
+export interface IResponseStatus {
   code: number;
   message: string;
 }
 
-export interface ResponseBody<T = unknown> {
-  status: ResponseStatus;
+export interface IResponseBody<T = unknown> {
+  status: IResponseStatus;
   data: T;
 }
