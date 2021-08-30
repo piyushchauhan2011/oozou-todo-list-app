@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Message } from '@my-todo-list/api-interfaces';
 
 export const App = () => {
-  const [m, setMessage] = useState<Message>({ message: '' });
+  const [m, setMessage] = useState<string>('');
 
-  useEffect(() => {
+  /*useEffect(() => {
     fetch('/api')
       .then((r) => r.json())
       .then(setMessage);
-  }, []);
+  }, []);*/
 
   return (
     <>
@@ -19,7 +18,6 @@ export const App = () => {
           src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
         />
       </div>
-      <div>{m.message}</div>
     </>
   );
 };
