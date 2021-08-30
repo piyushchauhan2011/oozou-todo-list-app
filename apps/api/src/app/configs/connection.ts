@@ -1,5 +1,5 @@
 import { ConnectionOptions } from 'typeorm/connection/ConnectionOptions';
-import { TodoEntity } from '../entities';
+import { SubtaskEntity, TodoEntity } from '../entities';
 import { createConnection } from 'typeorm';
 
 const options: ConnectionOptions = {
@@ -9,11 +9,9 @@ const options: ConnectionOptions = {
   username: 'postgres',
   password: 'postgres',
   database: 'my_todo_list',
-  entities: [TodoEntity],
+  entities: [TodoEntity, SubtaskEntity],
   logging: true,
   synchronize: true,
 };
 
-const connect = async () => createConnection(options);
-
-export default connect;
+export default createConnection(options);

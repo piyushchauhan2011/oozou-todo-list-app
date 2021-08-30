@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { ISubtask, Status } from '@todolist/shared';
 import TodoEntity from './todo.entity';
 
@@ -17,11 +23,9 @@ class SubtaskEntity implements ISubtask {
   })
   status: Status;
 
-  @Column({
-    name: 'todo_id',
-  })
   @ManyToOne(() => TodoEntity, (todo) => todo.id)
-  todoId: TodoEntity;
+  @JoinColumn({ name: 'todo_id' })
+  todoId: number;
 }
 
 export default SubtaskEntity;

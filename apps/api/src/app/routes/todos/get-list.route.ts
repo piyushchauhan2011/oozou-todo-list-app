@@ -6,10 +6,10 @@ import { SUCCESS_MESSAGE } from '../../constants';
 
 const getTodoList = express();
 
-getTodoList.get('todos', async (req, res: Response<IResponseBody>, next) => {
+getTodoList.get('/todos', async (req, res: Response<IResponseBody>, next) => {
   try {
     const repo = await todoRepository();
-    const results = await repo.createQueryBuilder('todos').getMany();
+    const results = await repo.find({ relations: ['subtasks'] });
     res.json({
       status: { message: SUCCESS_MESSAGE, code: res.statusCode },
       data: results,

@@ -11,5 +11,5 @@ export interface ITodo {
 }
 
 export interface ISubtask extends Omit<ITodo, 'createdDate' | 'subtasks'> {
-  todoId: ITodo;
+  todoId: number;
 }

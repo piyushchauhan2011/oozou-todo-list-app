@@ -2,7 +2,10 @@ import * as express from 'express';
 import { Response } from 'express-serve-static-core';
 import { IResponseBody, Status } from '@todolist/shared';
 import { subtaskRepository } from '../../repositories';
-import { ERROR_TODO_NOT_FOUND_MESSAGE, SUCCESS_MESSAGE } from '../../constants';
+import {
+  ERROR_SUBTASK_NOT_FOUND_MESSAGE,
+  SUCCESS_MESSAGE,
+} from '../../constants';
 
 const updateSubtaskStatusRoute = express();
 
@@ -26,7 +29,7 @@ updateSubtaskStatusRoute.put(
         });
       } else {
         res.status(404).json({
-          status: { message: ERROR_TODO_NOT_FOUND_MESSAGE, code: 404 },
+          status: { message: ERROR_SUBTASK_NOT_FOUND_MESSAGE, code: 404 },
           data: {},
         });
       }
@@ -36,4 +39,4 @@ updateSubtaskStatusRoute.put(
   }
 );
 
-export default updateSubtaskStatusRoute
+export default updateSubtaskStatusRoute;
