@@ -8,15 +8,19 @@ import {
   getTodoList,
 } from './app/routes';
 import { Response } from 'express-serve-static-core';
-import { IResponseBody } from '@todolist/shared';
+import {
+  IResponseBody,
+  BASE_URL,
+  SUBTASK_URL,
+  TODO_URL,
+} from '@todolist/shared';
 import { NextFunction } from 'express';
-import { BASE_URL, SUBTASK_URL, TODO_URL } from './app/constants';
 import { corsOptions as options } from './app/configs';
 
 const app = express();
 
 app.use(express.json());
-app.use(cors(options))
+app.use(cors(options));
 app.use(TODO_URL, createTodoRoute);
 app.use(TODO_URL, updateTodoStatusRoute);
 app.use(TODO_URL, getTodoList);
