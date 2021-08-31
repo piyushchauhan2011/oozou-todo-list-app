@@ -1,12 +1,8 @@
 import * as express from 'express'
 import { updateStatusHandler } from '../../handlers'
-import { subtaskRepository } from '../../repositories'
 
 const updateSubtaskStatusRoute = express()
 
-updateSubtaskStatusRoute.put(
-  '/update/:id',
-  updateStatusHandler(subtaskRepository, 'subtask')
-)
+updateSubtaskStatusRoute.put('/update/:id', updateStatusHandler)
 
 export default updateSubtaskStatusRoute
