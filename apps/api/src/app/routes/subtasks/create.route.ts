@@ -1,9 +1,9 @@
-import * as express from 'express';
-import subtaskRepository from '../../repositories/subtask.repo';
-import { createHandler } from '../../handlers';
+import * as express from 'express'
+import { createHandler } from '../../handlers'
+import subtaskRepository from '../../repositories/subtask.repo'
 
-const createSubtaskRoute = express();
+const createSubtaskRoute = express()
 
-createSubtaskRoute.post('/create', createHandler(subtaskRepository, 'subtask'));
+createSubtaskRoute.post('/create', createHandler(subtaskRepository, 'subtask'))
 
-export default createSubtaskRoute;
+export default createSubtaskRoute

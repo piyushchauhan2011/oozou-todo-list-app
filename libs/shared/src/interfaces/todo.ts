@@ -4,12 +4,12 @@ export enum Status {
 }
 
 export interface ITodo {
-  title: string;
-  status: Status;
-  createdDate: Date;
-  subtasks: ISubtask[];
+  title: string
+  status: Status
+  createdDate: Date
+  subtasks: ISubtask[]
 }
 
 export interface ISubtask extends Omit<ITodo, 'createdDate' | 'subtasks'> {
-  todoId: number;
+  todoId: number
 }

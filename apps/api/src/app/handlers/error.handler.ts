@@ -1,6 +1,6 @@
-import { Response } from 'express-serve-static-core';
-import { IResponseBody } from '@todolist/shared';
-import { NextFunction } from 'express';
+import { IResponseBody } from '@todolist/shared'
+import { NextFunction } from 'express'
+import { Response } from 'express-serve-static-core'
 
 const errorHandler = (
   err: Error,
@@ -11,7 +11,7 @@ const errorHandler = (
   res.status(500).json({
     status: { message: err.message, code: 500 },
     data: {},
-  });
-};
+  })
+}
 
-export default errorHandler;
+export default errorHandler

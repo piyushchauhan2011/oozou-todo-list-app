@@ -1,9 +1,9 @@
-import { TodoEntity } from '../entities';
-import { connect } from '../configs';
+import { connect } from '../configs'
+import { TodoEntity } from '../entities'
 
 const todoRepository = async () => {
-  const connection = await connect;
-  return connection.getRepository(TodoEntity);
-};
+  const connection = await connect
+  return connection.getRepository(TodoEntity)
+}
 
-export default todoRepository;
+export default todoRepository

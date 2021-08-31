@@ -1,3 +1,4 @@
+import { Status, ITodo, ISubtask } from '@todolist/shared'
 import {
   Entity,
   Column,
@@ -5,31 +6,31 @@ import {
   CreateDateColumn,
   OneToMany,
   JoinTable,
-} from 'typeorm';
-import { Status, ITodo, ISubtask } from '@todolist/shared';
-import SubtaskEntity from './subtask.entity';
+} from 'typeorm'
+// eslint-disable-next-line import/no-cycle
+import SubtaskEntity from './subtask.entity'
 
 @Entity()
 class TodoEntity implements ITodo {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column()
-  title: string;
+  title: string
 
   @Column({
     type: 'enum',
     enum: Status,
     default: Status.Pending,
   })
-  status: Status;
+  status: Status
 
   @CreateDateColumn({ name: 'created_at' })
-  createdDate: Date;
+  createdDate: Date
 
   @OneToMany(() => SubtaskEntity, (subtask) => subtask.todoId)
   @JoinTable()
-  subtasks: ISubtask[];
+  subtasks: ISubtask[]
 }
 
-export default TodoEntity;
+export default TodoEntity

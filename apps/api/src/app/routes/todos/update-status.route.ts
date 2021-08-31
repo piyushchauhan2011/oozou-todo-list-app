@@ -1,12 +1,12 @@
-import * as express from 'express';
-import { todoRepository } from '../../repositories';
-import { updateStatusHandler } from '../../handlers';
+import * as express from 'express'
+import { updateStatusHandler } from '../../handlers'
+import { todoRepository } from '../../repositories'
 
-const updateTodoStatusRoute = express();
+const updateTodoStatusRoute = express()
 
 updateTodoStatusRoute.put(
   '/update/:id',
   updateStatusHandler(todoRepository, 'todo')
-);
+)
 
-export default updateTodoStatusRoute;
+export default updateTodoStatusRoute

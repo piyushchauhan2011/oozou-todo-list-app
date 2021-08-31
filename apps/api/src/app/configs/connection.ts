@@ -1,6 +1,6 @@
-import { ConnectionOptions } from 'typeorm/connection/ConnectionOptions';
-import { SubtaskEntity, TodoEntity } from '../entities';
-import { createConnection } from 'typeorm';
+import { createConnection } from 'typeorm'
+import { ConnectionOptions } from 'typeorm/connection/ConnectionOptions'
+import { SubtaskEntity, TodoEntity } from '../entities'
 
 const options: ConnectionOptions = {
   type: 'postgres',
@@ -12,6 +12,6 @@ const options: ConnectionOptions = {
   entities: [TodoEntity, SubtaskEntity],
   logging: true,
   synchronize: true,
-};
+}
 
-export default createConnection(options);
+export default createConnection(options)

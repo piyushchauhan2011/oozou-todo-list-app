@@ -1,8 +1,8 @@
-import * as express from 'express';
-import { notFoundHandler } from '../../handlers';
+import * as express from 'express'
+import { notFoundHandler } from '../../handlers'
 
-const notfoundRoute = express();
+const notfoundRoute = express()
 
-notfoundRoute.get('*', notFoundHandler);
+notfoundRoute.get('*', notFoundHandler)
 
-export default notfoundRoute;
+export default notfoundRoute

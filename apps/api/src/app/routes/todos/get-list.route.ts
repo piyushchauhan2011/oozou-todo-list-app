@@ -1,8 +1,8 @@
-import * as express from 'express';
-import { getTodoListHandler } from '../../handlers';
+import * as express from 'express'
+import { getTodoListHandler } from '../../handlers'
 
-const getTodoList = express();
+const getTodoList = express()
 
-getTodoList.get('/todos', getTodoListHandler);
+getTodoList.get('/todos', getTodoListHandler)
 
-export default getTodoList;
+export default getTodoList

@@ -1,3 +1,3 @@
-import { Repository } from 'typeorm';
+import { Repository } from 'typeorm'
 
-export type RepositoryFunction<Entity> = () => Promise<Repository<Entity>>;
+export type RepositoryFunction<Entity> = () => Promise<Repository<Entity>>
