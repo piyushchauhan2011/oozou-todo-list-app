@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import { GET_ALL_TODO, ITodo } from '@todolist/shared'
+import React, { createRef } from 'react'
+import { useQuery } from 'react-query'
+import fetchApi from './api/config'
+import { Topbar, Empty, TodoList } from './components'
+import MainLayout from './layouts/main.layout'
 
 const App = () => {
-  const [m, setMessage] = useState<string>('')
-
-  /* useEffect(() => {
-    fetch('/api')
-      .then((r) => r.json())
-      .then(setMessage);
-  }, []); */
+  const topBarInputRef = createRef<HTMLInputElement>()
+  const { data } = useQuery<unknown, string, ITodo[]>(
+    'todos',
+    () => fetchApi<ITodo[]>(GET_ALL_TODO, 'GET'),
+    { initialData: [] }
+  )
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h1>Welcome to my-todo-list!</h1>
-      <img
-        alt="something"
-        src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-        width="450"
-      />
-    </div>
+    <MainLayout>
+      <Topbar inputRef={topBarInputRef} onEnterPress={() => undefined} />
+      {data.length === 0 ? (
+        <Empty onClick={() => topBarInputRef.current?.focus()} />
+      ) : (
+        <TodoList todos={data} />
+      )}
+    </MainLayout>
   )
 }
 
