@@ -4,6 +4,7 @@ export enum Status {
 }
 
 export interface ITodo {
+  id: number
   title: string
   status: Status
   createdDate: Date
