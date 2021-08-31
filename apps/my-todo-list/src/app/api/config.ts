@@ -6,17 +6,18 @@ type Method = 'GET' | 'POST' | 'PUT' | 'DELETE'
 const fetchApi = async <T = unknown>(
   endpoint: string,
   method: Method
-): Promise<IResponseBody<T> | string> => {
+): Promise<T> => {
   try {
     const response = await fetch(`${baseUrl}${endpoint}`, {
       method,
       headers: { 'Content-type': 'application/json;charset=UTF-8' },
     })
     if (response.status >= 200 && response.status < 300) {
-      return (await response.json()) as IResponseBody<T>
+      const { data } = (await response.json()) as IResponseBody<T>
+      return data
     }
-    const body = (await response.json()) as IResponseBody<T>
-    throw new Error(body.status.message)
+    const data = (await response.json()) as IResponseBody<T>
+    throw new Error(data.status.message)
   } catch (e) {
     return Promise.reject(e.message)
   }
