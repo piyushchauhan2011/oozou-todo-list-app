@@ -1,6 +1,5 @@
-import { Disclosure } from '@headlessui/react'
 import { ITodo } from '@todolist/shared'
-import React, { VFC } from 'react'
+import React, { useState, VFC } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import SubtaskList from '../subtask-list'
 import TodoItem from '../todo-item'
@@ -12,20 +11,35 @@ interface TodoListProps {
 const TodoList: VFC<TodoListProps> = (props) => {
   const { todos } = props
 
+  const [isShowSubtasks, setIsShowSubtasks] = useState<boolean>(false)
+  const [showIndex, setShowIndex] = useState<number>()
+
+  const handleClick = (todoIndex: number) => {
+    setIsShowSubtasks(!isShowSubtasks)
+    setShowIndex(todoIndex)
+  }
+
   return (
     <div className="bg-white overflow-hidden sm:rounded-md">
       <ul>
-        {todos.map((todo) => {
+        {todos.map((todo, todoIndex) => {
           const id = uuidv4()
           return (
-            <Disclosure key={id} as="li">
-              {({ open }) => (
-                <>
-                  <TodoItem open={open} title={todo.title} />
-                  <SubtaskList subtasks={todo.subtasks} />
-                </>
+            <li key={id}>
+              <TodoItem
+                open={isShowSubtasks}
+                todo={todo}
+                todoIndex={todoIndex}
+                onClick={() => handleClick(todoIndex)}
+              />
+              {isShowSubtasks && todoIndex === showIndex && (
+                <SubtaskList
+                  subtasks={todo.subtasks}
+                  todoId={todo.id}
+                  todoIndex={todoIndex}
+                />
               )}
-            </Disclosure>
+            </li>
           )
         })}
       </ul>

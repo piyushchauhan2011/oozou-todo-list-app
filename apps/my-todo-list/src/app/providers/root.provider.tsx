@@ -9,6 +9,15 @@ const RootProvider: FC = (props) => {
       queries: {
         suspense: false,
         retry: 3,
+        refetchOnWindowFocus: false,
+        onError(msg: string) {
+          alert(msg)
+        },
+      },
+      mutations: {
+        onError(msg: string) {
+          alert(msg)
+        },
       },
     },
   })

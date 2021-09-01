@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <MainLayout>
-      <Topbar inputRef={topBarInputRef} onEnterPress={() => undefined} />
+      <Topbar inputRef={topBarInputRef} />
       {data.length === 0 ? (
         <Empty onClick={() => topBarInputRef.current?.focus()} />
       ) : (

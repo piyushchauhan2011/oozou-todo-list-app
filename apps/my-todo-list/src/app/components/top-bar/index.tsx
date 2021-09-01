@@ -1,13 +1,45 @@
 import { PlusCircleIcon } from '@heroicons/react/outline'
-import React, { KeyboardEventHandler, RefObject, VFC } from 'react'
+import { CREATE_TODO, CreateTodoRequest, ITodo } from '@todolist/shared'
+import React, { KeyboardEvent, RefObject, VFC } from 'react'
+import { useMutation, useQueryClient } from 'react-query'
+import fetchApi from '../../api/config'
 
 interface TopbarProps {
   inputRef: RefObject<HTMLInputElement>
-  onEnterPress: KeyboardEventHandler<HTMLInputElement>
 }
 
 const Topbar: VFC<TopbarProps> = (props) => {
-  const { inputRef, onEnterPress } = props
+  const { inputRef } = props
+
+  const queryClient = useQueryClient()
+
+  const { mutate } = useMutation<
+    Omit<ITodo, 'subtasks'>,
+    string,
+    CreateTodoRequest
+  >(
+    (request) =>
+      fetchApi<Omit<ITodo, 'subtasks'>>(CREATE_TODO, 'POST', request),
+    {
+      async onSuccess(data) {
+        await queryClient.cancelQueries('todos')
+        const previousTodo = queryClient.getQueryData<ITodo[]>('todos')
+        queryClient.setQueryData('todos', [
+          ...previousTodo,
+          { ...data, subtasks: [] },
+        ])
+      },
+    }
+  )
+
+  const handlePressEnter = (event: KeyboardEvent<HTMLInputElement>) => {
+    const { value: title } = event.currentTarget
+    if (title && event.key === 'Enter') {
+      event.preventDefault()
+      mutate({ title })
+      event.currentTarget.value = ''
+    }
+  }
 
   return (
     <div className="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
@@ -29,7 +61,7 @@ const Topbar: VFC<TopbarProps> = (props) => {
                 name="task"
                 placeholder="Press 'enter' to add a todo"
                 type="text"
-                onKeyPress={onEnterPress}
+                onKeyPress={handlePressEnter}
               />
               <div className="absolute inset-y-0 right-0 flex py-4 pr-1.5">
                 <kbd className="inline-flex items-center border border-gray-200 rounded px-2 text-sm font-sans font-medium text-gray-400">
