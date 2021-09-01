@@ -1,94 +1,277 @@
+# Todo List App
 
+## About The Project
 
-# MyTodoList
+This project is an assignment of OOZOU that will allow us to assess your thought process, 
+ability to interpret requirements and technical implementation skills. You will be judged 
+on code design, structure, efficiency, specs, and cleanliness. 
 
-This project was generated using [Nx](https://nx.dev).
+PS: Sorry, I have no time to achieve the code coverage above 80%.
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+## Built with
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+- [DateFNS](https://date-fns.org/) - Date & time library
+- [Jest](https://jestjs.io/) - Testing framework
+- [Nx](https://nx.dev/) - Dev, test and build tool
+- [React Query](https://react-query.tanstack.com/) - API fetching wrapper
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) - Functionality React component
+  testing
+- [React.js](https://reactjs.org/) - UI library
+- [TailwindCSS](https://tailwindcss.com/) - Utility styling
+- [TypeScript](https://www.typescriptlang.org/) - Superset of JavaScript
 
-## Adding capabilities to your workspace
+## Getting Started
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+### Prerequisites
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+Set up your local development environment by following the steps below.
 
-Below are our core plugins:
+#### Setting up your Mac
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+- Install Homebrew (https://brew.sh/)
+- Install Node (version 12.x) using `brew install node` (You can also choose to use `nvm`).
+- Install Yarn `brew install yarn`
+- Download `git` (https://git-scm.com/download/mac)
+- (Optional) You can install
+  SourceTree (https://product-downloads.atlassian.com/software/sourcetree/ga/Sourcetree_4.0_229.zip) if you prefer using
+  a GUI tool for git.
 
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
+#### Setting up your Windows
 
-## Generate an application
+- Open powershell with administrator
+- Install Scoop (https://scoop.sh/) on
+  PowerShell `Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')`
+- (Optional) If you have error run `Set-ExecutionPolicy RemoteSigned -scope CurrentUser`
+- Install Command-Line Installer `scoop install cmder` (https://cmder.net/)
+- Open Cmder setting and setup Startup Command to `{cmd::Cmder}`
+- Install NodeJS (version 12.x) using `scoop install nodejs-lts`
+- Install Yarn `scoop install yarn`
+- Download `git` (https://git-scm.com/download/win)
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+#### Setting up your code editor
+
+We recommend using VSCode (https://code.visualstudio.com/docs/?dv=osx) and
+WebStorm (https://www.jetbrains.com/webstorm/) as your code editor. Download the below plugins to be more productive
+with your tasks and also adhere to the various coding standards being used in the project.
+
+##### Recommended VSCode plugins
+
+- Prettier - Code formatter
+- ESLint
+- Nx Console
+- TypeScript Extension Pack
+- React Extension Pack
+- Tabnine Autocomplete
+
+Here's a useful VSCode configuration:
+
+```json
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontSize": 16,
+  "editor.fontLigatures": true,
+  "editor.letterSpacing": 1.0,
+  "css.validate": false,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "prettier.enable": true,
+  "prettier.requireConfig": true,
+  "prettier.configPath": ".prettierrc",
+  "prettier.prettierPath": "./node_modules/prettier"
+}
+```
+
+##### Recommended WebStorm plugins
+
+- Nx WebStorm
+- Dotenv File Supports
+- Highlight Bracket Pair
+- Rainbow Bracket
+- Tabnine Autocomplete
+
+### Installation
+
+1. Clone the repo
+
+```shell
+git clone https://github.com/opn-ooo/waas-web-apps.git
+```
+
+2. Install packages
+
+```shell
+yarn install
+```
+
+3. Please check that you have nx running on your machine
+
+```shell
+nx
+```
+
+4. (Optional) If you encounter with the error that `nx command not found`, you need to install nx globally
+
+```shell
+npm install -g nx
+```
+
+### Running on your local machine
+
+1. Connect your workplace VPN
+2. Run command `nx serve` or `yarn start`
+
+## Conventions
+
+### Project structure
+
+- `/apps/` contains the application projects. These are the main entry point for a runnable application. We recommend
+  keeping applications as light-weight as possible, with all the heavy lifting being done by libraries that are imported
+  by each application.
+
+- `/libs/` contains the library projects. There are many kinds of libraries, and each library defines its own external
+  api so that boundaries between libraries remain clear.
+
+- `/tools/` contains scripts that act on your code base. This could be database scripts, custom executors (or builders)
+  or workspace generators.
+
+- `/workspace.json` defines each project in your workspace, and the executors that can be run on those projects.
+
+- `/nx.json` adds extra information about projects, including manually defined dependencies and tags that can be used to
+  restrict the ways projects are allowed to depend on each other.
+
+- `/tsconfig.json` sets up the global typescript settings and creates aliases for each library to aid when creating
+  typescript imports.
+
+### Conventional commit
+
+`<type>`(`<scope>`): `<description>`
+
+Since our JIRA does not yet integrate with our GitHub, it is needless to prefix your commit with JIRA's ticket.
+
+#### Type
+
+- _fix_: a commit of the type fix patches a bug in your codebase (this correlates with PATCH in semantic versioning).
+
+- _feat_: a commit of the type feat introduces a new feature to the codebase (this correlates with MINOR in semantic
+  versioning).
+
+- _refactor_: a commit of the type refactor organizes a codebase without changing its logic.
+
+- _chore_: a commit of the type chore is the change that does not affect the meaning of the code (white-space,
+  formatting, missing semi-colons, comments, etc)
+
+- _docs_: a commit of the type docs is for a documentation only changes i.e., update readme file.
+
+- _ci_: a commit of type ci changes CI configuration files and scripts.
+
+- _build_: a commit of the type build changes the build system or external dependencies (example scopes: gulp, broccoli,
+  npm).
+
+- _test_: a commit of the type test adds the missing tests or correct the existing tests.
+
+### Monorepo
+
+Please keep in mind that the monorepo follows certain conventions, which are techniques for scaling build systems and
+version control applications with a huge amount of code and frequent updates.
+
+- `Ease of code reuse` – Similar functionality or communication protocols can be abstracted into shared libraries and
+  directly included by projects, without the need of a dependency package manager.
+- `Simplified dependency management` In a multiple repository environment where multiple projects depend on a
+  third-party dependency, that dependency might be downloaded or built multiple times. In a monorepo the build can be
+  easily optimized, as referenced dependencies all exist in the same codebase.
+- `Atomic commits` When projects that work together are contained in separate repositories, releases need to sync which
+  versions of one project work with the other. In large enough projects, managing compatible versions between
+  dependencies can become dependency hell. Developers need to change multiple projects atomically.
+- `Large-scale code refactoring` Since developers have access to the entire project, refactors can ensure that every
+  piece of the project continues to function after a refactor.
+- `Collaboration across teams` In a monorepo that uses source dependencies (dependencies that are compiled from source)
+  , teams can improve projects being worked on by other teams. This leads to flexible code ownership.
+
+## Usage
+
+For more examples, please refer to the [Nx documentation](https://nx.dev/)
+
+### Generate a React application
+
+Run `nx g @nrwl/react:app <name>` to generate a React application.
 
 > You can use any of the plugins above to generate applications as well.
 
 When using Nx, you can create multiple applications and libraries in the same workspace.
 
-## Generate a library
+### Generate a React library
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+Run `nx g @nrwl/react:lib <name>` to generate a React library.
 
 > You can also use any of the plugins above to generate libraries as well.
 
-Libraries are shareable across libraries and applications. They can be imported from `@my-todo-list/mylib`.
+Libraries are shareable across libraries and applications. They can be imported from `@todolist/shared`.
 
-## Development server
+### Client-side development server 
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Run `nx serve` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any
+of the source files. The default is the `my-todo-list` app.
 
-## Code scaffolding
+### Server-side development Server
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+Run `nx serve api` or `npm start:api` for a dev server. Navigate to http://localhost:3333/. The app will automatically reload if you change any
+of the source files.
 
-## Build
+### Database is on the docker
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+You can run `docker-compose up` or `npm run up` to up and running the database.
 
-## Running unit tests
+### Code scaffolding
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+Using the IDE's plugins will save you a lot of time, so you won't have to remember and type the exact command.
+
+If you use `VSCode`, you can install the `Nx Console` plugin.
+
+If you use `WebStorm`, you can install the `Nx WebStorm` plugin.
+
+### Build
+
+Run `nx build <name>` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+Run `yarn build:staging` to build the app with a staging environment. The build artifacts will be stored in the `dist/`
+directory.
+
+### Running unit tests
+
+Run `nx test <name>` to execute the unit tests via [Jest](https://jestjs.io). By default, it will test the workspace
+app.
 
 Run `nx affected:test` to execute the unit tests affected by a change.
 
-## Running end-to-end tests
+### Affected by current changes
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+Run `nx affected:lint` to lint projects affected by current changes.
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+Run `nx affected:test` to test projects affected by current changes.
 
-## Understand your workspace
+Run `nx affected:build` to build applications and publishable libraries affected by current changes.
+
+You could receive an error stating that the build object could not be identified. You can fix it by cloning the develop
+branch. Alternatively, you must have a suffix with —base=origin/develop before the command.
+
+### Understand your workspace
 
 Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 
-## Further help
+## Further reading
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
-
-## ☁ Nx Cloud
-
-### Computation Memoization in the Cloud
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+- [Ant Design](https://ant.design/)
+- [Conventional Commit](https://www.conventionalcommits.org/)
+- [Domain-Driven Development](https://www.thoughtworks.com/insights/blog/domain-driven-design-neednt-be-hard-heres-how-start)
+- [Functional Programming](https://en.wikipedia.org/wiki/Functional_programming)
+- [Monorepo](https://github.com/joelparkerhenderson/monorepo_vs_polyrepo)
+- [Next.js](https://nextjs.org/)
+- [Nx](https://nx.dev/)
