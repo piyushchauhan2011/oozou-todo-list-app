@@ -19,9 +19,6 @@ const updateTodoStatusHandler = async (
             ? Status.Complete
             : Status.Pending,
       })
-      const updatedTodo = await todoRepo.findOne(req.params.id, {
-        relations: ['subtasks'],
-      })
       // If a todos' status is pending then update all of subtasks to complete
       if (existingTodo.status === Status.Pending) {
         const subtaskRepo = await subtaskRepository()
@@ -29,9 +26,12 @@ const updateTodoStatusHandler = async (
           .createQueryBuilder()
           .update()
           .set({ status: Status.Complete })
-          .where('todo_id = :todoId', { todoId: updatedTodo.id })
+          .where('todo_id = :todoId', { todoId: existingTodo.id })
           .execute()
       }
+      const updatedTodo = await todoRepo.findOne(req.params.id, {
+        relations: ['subtasks'],
+      })
       res.json({
         status: { message: SUCCESS_MESSAGE, code: res.statusCode },
         data: updatedTodo,

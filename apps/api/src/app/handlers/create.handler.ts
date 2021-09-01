@@ -17,8 +17,8 @@ const createHandler = (
   try {
     if (isValid) {
       const repo = await repositories()
-      const subtask = repo.create(req.body)
-      const results = await repo.save(subtask)
+      const task = repo.create(req.body)
+      const results = await repo.save(task)
       res.json({
         status: { message: SUCCESS_MESSAGE, code: res.statusCode },
         data: results,

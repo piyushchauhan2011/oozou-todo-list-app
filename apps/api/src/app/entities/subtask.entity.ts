@@ -26,7 +26,7 @@ class SubtaskEntity implements ISubtask {
 
   @ManyToOne(() => TodoEntity, (todo) => todo.id)
   @JoinColumn({ name: 'todo_id' })
-  todoId: number
+  todoId
 }
 
 export default SubtaskEntity

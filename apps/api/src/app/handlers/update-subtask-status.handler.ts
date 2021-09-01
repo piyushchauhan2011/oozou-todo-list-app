@@ -10,23 +10,26 @@ const updateSubtaskStatusHandler = async (
   next: NextFunction
 ) => {
   try {
-    const repo = await subtaskRepository()
-    const existingSubtask = await repo.findOne(req.params.id)
+    const subtaskRepo = await subtaskRepository()
+    const todoRepo = await todoRepository()
+    const existingSubtask = await subtaskRepo.findOne(req.params.id, {
+      relations: ['todoId'],
+    })
     if (existingSubtask) {
-      await repo.update(req.params.id, {
+      await subtaskRepo.update(req.params.id, {
         status:
           existingSubtask.status === Status.Pending
             ? Status.Complete
             : Status.Pending,
       })
-      const updatedSubtask = await repo.findOne(req.params.id)
-      // If a updated subtask' status is pending then update a todo to pending
-      if (updatedSubtask.status === Status.Pending) {
-        const todoRepo = await todoRepository()
-        await todoRepo.update(updatedSubtask.todoId, {
+      if (existingSubtask.status !== Status.Pending) {
+        await todoRepo.update(existingSubtask.todoId.id, {
           status: Status.Pending,
         })
       }
+      const updatedSubtask = await subtaskRepo.findOne(req.params.id, {
+        relations: ['todoId'],
+      })
       res.json({
         status: { message: SUCCESS_MESSAGE, code: res.statusCode },
         data: updatedSubtask,
