@@ -1,5 +1,6 @@
+import React from 'react'
+import { render } from '../../test-utils'
 import Input from './index'
-import { render } from '@testing-library/react'
 
 describe('Input', () => {
   it('should render successfully', () => {
