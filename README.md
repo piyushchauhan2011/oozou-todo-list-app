@@ -1,4 +1,4 @@
-# Todo List App
+# Oozou Todo List App Take-home Assignment
 
 ## About The Project
 
