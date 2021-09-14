@@ -6,11 +6,8 @@ This project is an assignment of OOZOU that will allow us to assess your thought
 ability to interpret requirements and technical implementation skills. You will be judged 
 on code design, structure, efficiency, specs, and cleanliness. 
 
-PS: Sorry, I have no time to achieve the code coverage above 80%.
-
 ## Built with
 
-- [DateFNS](https://date-fns.org/) - Date & time library
 - [Jest](https://jestjs.io/) - Testing framework
 - [Nx](https://nx.dev/) - Dev, test and build tool
 - [React Query](https://react-query.tanstack.com/) - API fetching wrapper
